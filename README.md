@@ -9,4 +9,4 @@ The goal is to build a small event-based backtesting system.
 - Created the GitHub repository
 - Cloned the project locally
 - Added the first project structure
-- Added a first C++ entry poin
+- Added a first C++ entry point

@@ -1,5 +1,6 @@
-build/
-*.exe
-*.out
+mini-event-backtester
+mini-event-backtester.exe
 *.o
-.DS_Store
+*.obj
+*.out
+.vscode/

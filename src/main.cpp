@@ -293,6 +293,9 @@ private:
     using BidLevels = std::map<Price, PriceLevel, std::greater<Price>>;
 
 public:
+
+    // Octavian : la process ar fi fain sa ai functie separata pentru modify; si aia sa apeleze un cancel si dupa un add
+
     // aplic add cancel sau modify
     void process(const MarketEvent& event) {
         if (event.action == EventAction::Cancel) {
@@ -318,6 +321,8 @@ public:
         };
     }
 
+    // Octavian : pune comentariul cu prioritati sub : da fill...
+
     // da fill la un limit order prioritati : pret si timp
     std::optional<Price> executeLimitOrderIfMarketable(
         Side side,
@@ -336,7 +341,15 @@ public:
 private:
     BidLevels bids_;
     AskLevels asks_;
+
+    // Octavian : merita sa faci pair-ul un nume in sine; sa faci struct si sa scrii hash de mana sau il faci map normal si scrii comparator custom
+    // like daca dau hover la .first / .second imi arata tipul da e mai nice sa vad direct
+    ///si probabil Vlad ar comenta de asta so don't blame me
     std::unordered_map<OrderId, std::pair<Side, Price>> locations_;
+
+    // Octavian : care e scopu sa mai dai cancel order? ar fi mai ok sa nu faci nimic daca ai doua order id-uri la fel
+    // acum cand citesti datele din fisier, poti face checker la fisier de asta
+    // sau sa intorci eroare maybe?
 
     // adauga un order nou la coada listei de pret
     void addOrder(OrderId orderId, Side side, Quantity quantity, Price price) {
@@ -383,6 +396,8 @@ private:
             levels.erase(level);
         }
     }
+
+    /// Octavian : sumLevel merita optimizat
 
     // aduna currenctul care inca e activ de la o lista de pret
     static Quantity sumLevel(const PriceLevel& level) {

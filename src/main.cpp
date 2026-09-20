@@ -449,6 +449,7 @@ private:
                 levels.erase(level);
             }
         }
+        // Review: Returning an integer average price loses notional precision for fills spanning multiple price levels. Return per-level fills or exact notional before applying PnL.
         return totalNotional / quantity;
     }
 };

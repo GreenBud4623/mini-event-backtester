@@ -446,6 +446,14 @@ private:
         long long totalNotional = 0;
         while (remaining > 0) {
             auto level = levels.begin();
+            ///
+            /// Octavian : din nou treaba cu .first si .second
+            /// mai ales ca level e template
+            /// si eu de unde sa stiu ce sunt ele
+            ///
+            /// Si lasa mai mult spatiu intre linii ca la cat de multe operatii ai acolo poate fi greu
+            ///
+
             const Price price = level->first;
             for (auto order = level->second.begin();
                  order != level->second.end() && remaining > 0;) {
@@ -478,6 +486,8 @@ public:
             throw std::runtime_error("fees cannot be negative");
         }
     }
+
+    ///Octavian : poate ar fi mers sa ai buy si sell private?
 
     // aplica buy fill decrementand banii si incrementand actiunile(pozitia)
     void buy(Price price, Quantity quantity) {
